@@ -8,11 +8,19 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
         class="com.zdzioch.message.domain.Message">
         <constructor-arg name="subject" value="some subject"/>
         <constructor-arg name="body" value="some body"/>
-
+        <property name="id" value=""/>
+        <property name="to" value="javakrk5"/>
+        <property name="from" value="smalaca"/>
 
     </bean>
 
     <bean
             id="messageRepository"
-            class="com.zdzioch.message.repository.inmemory.InMemoryMessageRepository"/>
+            class="com.zdzioch.message.repository.inmemory.InMemoryMessageRepository">
+        <constructor-arg>
+            <list>
+                <ref bean="message1"/>
+            </list>
+        </constructor-arg>
+    </bean>
 </beans>
