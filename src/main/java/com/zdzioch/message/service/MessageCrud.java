@@ -1,6 +1,7 @@
 package com.zdzioch.message.service;
 
 import com.zdzioch.message.domain.Message;
+import com.zdzioch.message.domain.MessageFatory;
 import com.zdzioch.message.domain.MessageRepository;
 
 public class MessageCrud {
@@ -12,12 +13,7 @@ public class MessageCrud {
     }
 
     public Response createNew(MessageDTO messageDTO){
-        Message message = new Message.MessageBuilder()
-                .withBody(messageDTO.getBody())
-                .withSubject(messageDTO.getSubject())
-                .withFrom(messageDTO.getFrom())
-                .withTo(messageDTO.getTo())
-                .build();
+        Message message = new MessageFatory().createFrom(messageDTO);
 
         if (!messageRepository.exists(message)) {
             message.setId("1");
