@@ -2,7 +2,6 @@ package com.zdzioch.message.service;
 
 import com.zdzioch.message.domain.Message;
 import com.zdzioch.message.domain.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class MessageCrud {
 
@@ -12,13 +11,12 @@ public class MessageCrud {
         this.messageRepository = messageRepository;
     }
 
-    public Response createNew(
-            String subject, String body, String from, String to) {
+    public Response createNew(MessageDTO messageDTO){
         Message message = new Message.MessageBuilder()
-                .withBody(body)
-                .withSubject(subject)
-                .withFrom(from)
-                .withTo(to)
+                .withBody(messageDTO.getBody())
+                .withSubject(messageDTO.getSubject())
+                .withFrom(messageDTO.getFrom())
+                .withTo(messageDTO.getTo())
                 .build();
 
         if (!messageRepository.exists(message)) {
@@ -30,4 +28,5 @@ public class MessageCrud {
 
         return Response.aFailureResponse("Message already exists");
     }
+
 }

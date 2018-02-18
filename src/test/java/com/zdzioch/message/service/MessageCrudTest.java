@@ -25,7 +25,13 @@ public class MessageCrudTest {
         String from = "from";
         String to = "to";
 
-        Response response = messageCrud.createNew(subject, body, from, to);
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setSubject(subject);
+        messageDTO.setBody(body);
+        messageDTO.setFrom(from);
+        messageDTO.setTo(to);
+
+        Response response = messageCrud.createNew(messageDTO);
 
         Assert.assertTrue(response.isSuccess());
         Assert.assertThat(response.getMessage(), any(String.class));
@@ -38,6 +44,13 @@ public class MessageCrudTest {
         String body = "body";
         String from = "from";
         String to = "to";
+
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setSubject(subject);
+        messageDTO.setBody(body);
+        messageDTO.setFrom(from);
+        messageDTO.setTo(to);
+
         messageRepository.add(new Message.MessageBuilder()
                 .withBody(body)
                 .withSubject(subject)
@@ -45,7 +58,7 @@ public class MessageCrudTest {
                 .withTo(to)
                 .build());
 
-        Response response = messageCrud.createNew(subject, body, from, to);
+        Response response = messageCrud.createNew(messageDTO);
 
         Assert.assertFalse(response.isSuccess());
     }

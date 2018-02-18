@@ -8,10 +8,27 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
         class="com.zdzioch.message.domain.Message">
         <constructor-arg name="subject" value="some subject"/>
         <constructor-arg name="body" value="some body"/>
-        <property name="id" value=""/>
-        <property name="to" value="javakrk5"/>
-        <property name="from" value="smalaca"/>
+            <property name="id" value="1"/>
+            <property name="to" value="javakrk5"/>
+            <property name="from" value="zdzioch"/>
+    </bean>
 
+    <bean
+            id="message2"
+            class="com.zdzioch.message.domain.Message">
+        <constructor-arg name="subject" value="any text"/>
+        <constructor-arg name="body" value="body of message"/>
+            <property name="id" value="1"/>
+            <property name="to" value="google"/>
+            <property name="from" value="misiek"/>
+    </bean>
+
+    <bean id="message3" class="com.zdzioch.message.domain.Message">
+        <constructor-arg name="subject" value="subject"/>
+        <constructor-arg name="body" value="text of body"/>
+            <property name="id" value="1"/>
+            <property name="from" value="me"/>
+            <property name="to" value="somewhere"/>
     </bean>
 
     <bean
@@ -20,6 +37,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
         <constructor-arg>
             <list>
                 <ref bean="message1"/>
+                <ref bean="message2"/>
+                <ref bean="message3"/>
             </list>
         </constructor-arg>
     </bean>
