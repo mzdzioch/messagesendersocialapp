@@ -1,6 +1,5 @@
 package com.zdzioch.message.repository.inmemory;
 
-import com.zdzioch.message.domain.Message;
 import com.zdzioch.message.domain.MessageRepository;
 import com.zdzioch.message.service.MessageCrud;
 import com.zdzioch.message.service.MessageDTO;
@@ -12,19 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/message-sender.xml")
+@ContextConfiguration(locations = {"/message-sender.xml", "/fake-message.xml"})
 
 public class InMemoryMessageRepositoryTest {
     public static final String SEND_FROM = "me";
     public static final String SEND_TO = "somewhere";
     public static final String BODY_TEXT = "text of body";
-    public static final String SEND_FROM_M1 = "zdzioch";
-    public static final String SEND_TO_M1 = "javakrk5";
-    public static final String BODY_M1 = "some body";
-    public static final String SUBJECT_M1 = "some subject";
     public static final String SUBJECT_M2 = "any text";
     public static final String BODY_M2 = "body of message";
     public static final String SEND_TO_M2 = "google";
@@ -36,13 +29,13 @@ public class InMemoryMessageRepositoryTest {
 
     @Test
     public void shouldNotCreateMessage1(){
-        String from  = SEND_FROM_M1;
+
 
         MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setSubject(SUBJECT_M1);
-        messageDTO.setBody(BODY_M1);
-        messageDTO.setFrom(from);
-        messageDTO.setTo(SEND_TO_M1);
+        messageDTO.setSubject("some subject");
+        messageDTO.setBody("some body");
+        messageDTO.setFrom("zdzioch");
+        messageDTO.setTo("javakrk5");
 
         Response response = messageCrud.createNew(messageDTO);
 

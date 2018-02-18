@@ -1,6 +1,7 @@
 package com.zdzioch.message.service;
 
 import com.zdzioch.message.domain.Message;
+import com.zdzioch.message.domain.MessageFactory;
 import com.zdzioch.message.domain.MessageRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,12 +52,7 @@ public class MessageCrudTest {
         messageDTO.setFrom(from);
         messageDTO.setTo(to);
 
-        messageRepository.add(new Message.MessageBuilder()
-                .withBody(body)
-                .withSubject(subject)
-                .withFrom(from)
-                .withTo(to)
-                .build());
+        Message message = new MessageFactory().createFrom(messageDTO);
 
         Response response = messageCrud.createNew(messageDTO);
 

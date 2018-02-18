@@ -1,4 +1,6 @@
 import com.zdzioch.message.domain.Message;
+import com.zdzioch.message.domain.MessageFactory;
+import com.zdzioch.message.service.MessageDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,12 +14,14 @@ import org.junit.Test;
             String sentFrom = "from";
             String body = "body";
             String subject = "subject";
-            Message message = new Message.MessageBuilder()
-                    .withSubject(subject)
-                    .withBody(body)
-                    .withFrom(sentFrom)
-                    .withTo(sentTo)
-                    .build();
+
+            MessageDTO messageDTO = new MessageDTO();
+            messageDTO.setTo(sentTo);
+            messageDTO.setFrom(sentFrom);
+            messageDTO.setBody(body);
+            messageDTO.setSubject(subject);
+            Message message = new MessageFactory().createFrom(messageDTO);
+
 
             Assert.assertEquals("subject", message.getSubject());
             Assert.assertEquals("body", message.getBody());
