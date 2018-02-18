@@ -18,6 +18,17 @@ import static org.junit.Assert.*;
 @ContextConfiguration("/message-sender.xml")
 
 public class InMemoryMessageRepositoryTest {
+    public static final String SEND_FROM = "me";
+    public static final String SEND_TO = "somewhere";
+    public static final String BODY_TEXT = "text of body";
+    public static final String SEND_FROM_M1 = "zdzioch";
+    public static final String SEND_TO_M1 = "javakrk5";
+    public static final String BODY_M1 = "some body";
+    public static final String SUBJECT_M1 = "some subject";
+    public static final String SUBJECT_M2 = "any text";
+    public static final String BODY_M2 = "body of message";
+    public static final String SEND_TO_M2 = "google";
+    public static final String SEND_FROM_M2 = "misiek";
     @Autowired
     private MessageRepository messageRepository;
     @Autowired
@@ -25,16 +36,13 @@ public class InMemoryMessageRepositoryTest {
 
     @Test
     public void shouldNotCreateMessage1(){
-        String subject = "some subject";
-        String body = "some body";
-        String to = "javakrk5";
-        String from  = "zdzioch";
+        String from  = SEND_FROM_M1;
 
         MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setSubject(subject);
-        messageDTO.setBody(body);
+        messageDTO.setSubject(SUBJECT_M1);
+        messageDTO.setBody(BODY_M1);
         messageDTO.setFrom(from);
-        messageDTO.setTo(to);
+        messageDTO.setTo(SEND_TO_M1);
 
         Response response = messageCrud.createNew(messageDTO);
 
@@ -43,10 +51,10 @@ public class InMemoryMessageRepositoryTest {
 
     @Test
     public void shouldNotCreateMessage2(){
-        String subject = "any text";
-        String body = "body of message";
-        String to = "google";
-        String from = "misiek";
+        String subject = SUBJECT_M2;
+        String body = BODY_M2;
+        String to = SEND_TO_M2;
+        String from = SEND_FROM_M2;
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setSubject(subject);
@@ -62,9 +70,9 @@ public class InMemoryMessageRepositoryTest {
     @Test
     public void shouldNotCreateMessage3(){
         String subject = "subject";
-        String body = "text of body";
-        String to = "somewhere";
-        String from = "me";
+        String body = BODY_TEXT;
+        String to = SEND_TO;
+        String from = SEND_FROM;
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setSubject(subject);
@@ -80,9 +88,9 @@ public class InMemoryMessageRepositoryTest {
     @Test
     public void shouldCreateMessage(){
         String subject = "subjec";
-        String body = "text of body";
-        String to = "somewhere";
-        String from = "me";
+        String body = BODY_TEXT;
+        String to = SEND_TO;
+        String from = SEND_FROM;
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setSubject(subject);
@@ -95,6 +103,7 @@ public class InMemoryMessageRepositoryTest {
         Assert.assertTrue(response.isSuccess());
 
     }
+
 
     //        messageRepository.add(new Message.MessageBuilder()
 //        .withSubject(subject)

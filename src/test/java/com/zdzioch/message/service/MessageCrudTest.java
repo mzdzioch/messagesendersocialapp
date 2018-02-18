@@ -15,21 +15,21 @@ import static org.hamcrest.CoreMatchers.any;
 //@ContextConfiguration("file:C:\\dev\\workspace\\javakurs\\messagesendersocialapp\\src\\main\\java\\message-sender.xml")
 @ContextConfiguration("/message-sender.xml")
 public class MessageCrudTest {
+    public static final String SUBJECT = "subject";
+    public static final String BODY = "body";
+    public static final String SEND_FROM = "from";
+    public static final String SEND_TO = "to";
     @Autowired private MessageRepository messageRepository;
     @Autowired private MessageCrud messageCrud;
 
     @Test
     public void shouldCreateNewMessage() {
-        String subject = "subject";
-        String body = "body";
-        String from = "from";
-        String to = "to";
 
-        MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setSubject(subject);
-        messageDTO.setBody(body);
-        messageDTO.setFrom(from);
-        messageDTO.setTo(to);
+        MessageDTO messageDTO = getMessageDTO();
+        messageDTO.setSubject(SUBJECT);
+        messageDTO.setBody(BODY);
+        messageDTO.setFrom(SEND_FROM);
+        messageDTO.setTo(SEND_TO);
 
         Response response = messageCrud.createNew(messageDTO);
 
@@ -40,12 +40,12 @@ public class MessageCrudTest {
 
     @Test
     public void shouldNotCreateNewMessage() {
-        String subject = "subject";
-        String body = "body";
-        String from = "from";
-        String to = "to";
+        String subject = SUBJECT;
+        String body = BODY;
+        String from = SEND_FROM;
+        String to = SEND_TO;
 
-        MessageDTO messageDTO = new MessageDTO();
+        MessageDTO messageDTO = getMessageDTO();
         messageDTO.setSubject(subject);
         messageDTO.setBody(body);
         messageDTO.setFrom(from);
@@ -61,6 +61,10 @@ public class MessageCrudTest {
         Response response = messageCrud.createNew(messageDTO);
 
         Assert.assertFalse(response.isSuccess());
+    }
+
+    private MessageDTO getMessageDTO() {
+        return new MessageDTO();
     }
 
 
